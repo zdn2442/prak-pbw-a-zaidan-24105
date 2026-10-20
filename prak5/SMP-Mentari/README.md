@@ -1,58 +1,160 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏫 SMP Mentari — Website Sistem Informasi Sekolah
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📌 Deskripsi
+**SMP Mentari** adalah aplikasi web sistem informasi sekolah yang dibangun menggunakan framework **Laravel**. Proyek ini merupakan hasil dari **Praktikum 5 - Pemrograman Berbasis Web**, yang mencakup implementasi **Eloquent ORM**, **middleware autentikasi**, **CRUD resource controller**, serta fitur publik dan admin yang terpisah.
 
-## About Laravel
+## 🛠️ Teknologi yang Digunakan
+| Teknologi | Keterangan |
+|-----------|------------|
+| **PHP 8.x** | Bahasa pemrograman backend |
+| **Laravel 12.x** | Framework PHP |
+| **MySQL** | Sistem manajemen basis data |
+| **Blade Template Engine** | Template engine bawaan Laravel |
+| **TailwindCSS** | CSS framework untuk styling |
+| **Laravel Breeze** | Paket autentikasi (Login/Register) |
+| **Laragon** | Local development environment |
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fitur
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🌐 Fitur Publik (Tanpa Login)
+- 🏠 **Halaman Home** — Landing page sekolah
+- 📝 **Buku Tamu** — Pengunjung bisa mengirim pesan/kesan melalui form buku tamu
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔐 Fitur Admin (Perlu Login)
+- 📊 **Dashboard** — Ringkasan statistik data sekolah
+- 📅 **Manajemen Kegiatan** — CRUD lengkap (tambah, lihat, edit, hapus) kegiatan sekolah
+- 📋 **Kelola Buku Tamu** — Admin dapat melihat dan menghapus pesan buku tamu
+- ⚙️ **Pengaturan Website** — Konfigurasi pengaturan website
+- 👤 **Profil Pengguna** — Edit profil akun (Laravel Breeze)
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+## 📁 Struktur Penting
+```
+SMP-Mentari/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── PageController.php          ← Halaman publik
+│   │   ├── DashboardController.php     ← Dashboard admin
+│   │   ├── KegiatanController.php      ← CRUD kegiatan
+│   │   ├── PesanTamuController.php     ← Buku tamu (publik & admin)
+│   │   ├── SettingController.php       ← Pengaturan website
+│   │   └── ProfileController.php       ← Profil user (Breeze)
+│   └── Models/
+│       ├── Kegiatan.php
+│       ├── PesanTamu.php
+│       ├── Setting.php
+│       └── User.php
+├── database/
+│   ├── migrations/
+│   │   ├── create_pesan_tamus_table
+│   │   ├── create_kegiatans_table
+│   │   └── create_settings_table
+│   └── seeders/
+├── resources/views/
+│   ├── layouts/        ← Layout utama
+│   ├── auth/           ← Halaman login & register
+│   ├── bukutamu/       ← Views buku tamu
+│   ├── kegiatan/       ← Views kegiatan (CRUD)
+│   ├── admin/          ← Views admin
+│   ├── profile/        ← Views profil
+│   ├── components/     ← Komponen Blade
+│   ├── home.blade.php
+│   └── dashboard.blade.php
+└── routes/
+    ├── web.php         ← Rute publik & admin
+    └── auth.php        ← Rute autentikasi (Breeze)
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## 🗄️ Database
 
-## Contributing
+### Tabel `pesan_tamus`
+| Kolom | Tipe | Keterangan |
+|-------|------|------------|
+| id | BIGINT | Primary Key, Auto Increment |
+| nama | VARCHAR | Nama pengirim pesan |
+| pesan | TEXT | Isi pesan buku tamu |
+| created_at | TIMESTAMP | Waktu dibuat |
+| updated_at | TIMESTAMP | Waktu diperbarui |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Tabel `kegiatans`
+| Kolom | Tipe | Keterangan |
+|-------|------|------------|
+| id | BIGINT | Primary Key, Auto Increment |
+| judul | VARCHAR | Judul kegiatan |
+| deskripsi | TEXT | Deskripsi kegiatan |
+| created_at | TIMESTAMP | Waktu dibuat |
+| updated_at | TIMESTAMP | Waktu diperbarui |
 
-## Code of Conduct
+### Tabel `settings`
+| Kolom | Tipe | Keterangan |
+|-------|------|------------|
+| id | BIGINT | Primary Key, Auto Increment |
+| key | VARCHAR | Nama pengaturan |
+| value | TEXT | Nilai pengaturan |
+| created_at | TIMESTAMP | Waktu dibuat |
+| updated_at | TIMESTAMP | Waktu diperbarui |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🔗 Routing
 
-## Security Vulnerabilities
+### Rute Publik
+| Method | URI | Controller | Deskripsi |
+|--------|-----|------------|-----------|
+| GET | `/` | PageController@home | Halaman utama sekolah |
+| GET | `/bukutamu` | PesanTamuController@index | Halaman buku tamu |
+| POST | `/bukutamu` | PesanTamuController@store | Kirim pesan buku tamu |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Rute Terproteksi (Memerlukan Login)
+| Method | URI | Controller | Deskripsi |
+|--------|-----|------------|-----------|
+| GET | `/dashboard` | DashboardController@index | Dashboard admin |
+| GET | `/kegiatan` | KegiatanController@index | Daftar kegiatan |
+| GET | `/kegiatan/create` | KegiatanController@create | Form tambah kegiatan |
+| POST | `/kegiatan` | KegiatanController@store | Simpan kegiatan baru |
+| GET | `/kegiatan/{id}` | KegiatanController@show | Detail kegiatan |
+| GET | `/kegiatan/{id}/edit` | KegiatanController@edit | Form edit kegiatan |
+| PUT | `/kegiatan/{id}` | KegiatanController@update | Update kegiatan |
+| DELETE | `/kegiatan/{id}` | KegiatanController@destroy | Hapus kegiatan |
+| GET | `/admin/bukutamu` | PesanTamuController@adminIndex | Kelola buku tamu |
+| DELETE | `/admin/bukutamu/{id}` | PesanTamuController@destroy | Hapus pesan tamu |
+| GET | `/settings` | SettingController@index | Halaman pengaturan |
+| PUT | `/settings` | SettingController@update | Simpan pengaturan |
 
-## License
+## 📸 Screenshot
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Halaman Login
+![Login Page](screenshot/ss_login.png)
+
+### Dashboard Admin
+![Dashboard](screenshot/ss_dashboard.png)
+
+### Halaman Buku Tamu
+![Buku Tamu](screenshot/ss_bukutamu.png)
+
+### Manajemen Kegiatan
+![Kegiatan](screenshot/ss_kegiatan.png)
+
+### Pengaturan Website
+![Settings](screenshot/ss_settings.png)
+
+---
+
+## 📖 Apa yang Dipelajari
+1. **Laravel Breeze** — Implementasi sistem autentikasi (login, register, logout)
+2. **Middleware** — Melindungi rute admin dengan middleware `auth`
+3. **Resource Controller** — Menggunakan `Route::resource()` untuk CRUD kegiatan
+4. **Eloquent ORM** — Interaksi dengan database melalui model
+5. **Blade Components** — Membuat komponen reusable
+6. **Pemisahan Public & Admin** — Membedakan rute dan tampilan untuk publik dan admin
+
+## 🚀 Cara Menjalankan
+1. Pastikan **Laragon** sudah aktif (Apache & MySQL)
+2. Buat database baru di MySQL (misal: `smp_mentari`)
+3. Salin `.env.example` menjadi `.env` dan sesuaikan konfigurasi database
+4. Jalankan perintah berikut di terminal:
+   ```bash
+   composer install
+   php artisan key:generate
+   php artisan migrate
+   php artisan serve
+   ```
+5. Buka browser dan akses `http://localhost:8000`
+6. Register akun baru untuk login ke dashboard admin
